@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 const HamburgerNav = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -42,5 +42,4 @@ const HamburgerNav = () => {
     </div>
   );
 };
-
 export default HamburgerNav;
