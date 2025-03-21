@@ -9,7 +9,7 @@ interface InputComponentProps {
 const InputComponent = (props: InputComponentProps) => {
   const { onChange, value, onKeydown, isValueEmpty } = props;
   return (
-    <div className="w-full h-full flex justify-start items-center ">
+    <div className="w-full h-full flex justify-start items-center  ">
       <div
         className={`${
           isValueEmpty ? "border-red-700 border-1" : "border-black"
@@ -32,7 +32,7 @@ const InputComponent = (props: InputComponentProps) => {
           onChange={onChange}
           value={value}
           onKeyDown={onKeydown}
-          className="h-full w-full focus:border-none border-none pl-15 "
+          className="h-full w-full focus:border-none border-none pl-12"
         />
       </div>
     </div>

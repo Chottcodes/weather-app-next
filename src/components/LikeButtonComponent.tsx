@@ -12,7 +12,7 @@ const LikeButtonComponent = (props: LikeButtonProps) => {
   return (
     <div className="w-full h-full flex justify-center items-center" >
       <button onClick={favoriteClick} className="pointer-cursor">
-        <img src={clearstar} alt="Like Icon" className={`${isLiked ? 'hidden': 'block'} h-10 md:h-7`} />
+        <img src={clearstar} alt="Like Icon" className={`${isLiked ? 'hidden': 'block'} h-10 md:h-7 lg:h-12`} />
       </button>
       <button onClick={removeFavorite} className="pointer-cursor">
         <img src={fullstar} alt="Like Icon" className={`${isLiked ? 'block': 'hidden'} h-10`} />

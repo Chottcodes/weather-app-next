@@ -44,8 +44,8 @@ export default function Home() {
         setCityName(userSearchInputValue);
         setIsInputEmpty(true);
         setIsErrorOn(false);
-      }else{
-        setIsErrorOn(true)
+      } else {
+        setIsErrorOn(true);
       }
     }
     if (favoritesArray.includes(cityName)) {
@@ -82,12 +82,11 @@ export default function Home() {
     setIsLike(false);
   };
   const handleSearchButton = () => {
-    if(userSearchInput.trim()!== ""){
-    setCityName(userSearchInput); 
-    }else{
-      setIsErrorOn(true)
+    if (userSearchInput.trim() !== "") {
+      setCityName(userSearchInput);
+    } else {
+      setIsErrorOn(true);
     }
-   
   };
   //GeoLocation Section
   useEffect(() => {
@@ -174,7 +173,7 @@ export default function Home() {
   useEffect(() => {
     if (userSearchInput != "" && userSearchInput.length > 3) {
       setIsInputEmpty(false);
-      setIsErrorOn(false)
+      setIsErrorOn(false);
     } else {
       setIsInputEmpty(true);
     }
@@ -182,28 +181,28 @@ export default function Home() {
 
   return (
     <div
-      className="w-full h-screen flex flex-col justify-end md:justify-center md:items-center font-sans"
+      className="w-full h-screen flex flex-col fixed justify-end md:justify-center md:items-center font-sans"
       style={{
         backgroundImage: "url('/assets/images/background.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="md:h-[75%] md:w-[90%] h-[90%] w-full rounded-xl border-gray-300 border-4 drop-shadow-4xl bg-[#c3bfbfe2] flex flex-col justify-center text-black">
-        <div className="w-full h-20 flex justify-end items-center">
+      <div className="h-[95%] w-full md:h-[75%] md:w-[90%] lg:w-[90%] lg:h-[90%]  rounded-xl border-gray-300 border-4 drop-shadow-4xl bg-[#c3bfbfe2] flex flex-col justify-center text-black">
+        <div className="w-full h-20 flex justify-end items-center mt-10">
           <HamburgerNav
             onFavoriteClick={(cityName) => {
               setCityName(cityName);
             }}
           />
         </div>
-        <div className="w-full h-[100%] flex flex-col bg-green-500">
-          <div className="w-full h-full flex flex-col md:flex-row md:justify-center md:items-center bg-red-500">
-            <div className="w-[50%] h-full md:h-[80%] bg-green-500">
+        <div className="w-full h-[100%] flex flex-col ">
+          <div className="h-[70%] md:w-full md:h-full bg-amber-600 flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center transform-all duration-300">
+            <div className="w-[50%] h-[20%] md:h-[80%] ">
               <WeatherIcon Icon={mainIcon} />
             </div>
-            <div className="w-[50%] md:h-[80%] h-full flex flex-col justify-center items-start">
-              <div className="w-[50%] md:w-full">
+            <div className="w-full h-[60%] md:h-[80%] lg:w-[50%] bg-green-600 flex flex-col justify-center items-start transform-all duration-300">
+              <div className="w-full h-[70%] md:w-full lg:w-[50%]">
                 <CurrentTempDisplayComponent
                   mainTempDisplay={mainTempDisplay}
                   cityName={cityName}
@@ -211,14 +210,14 @@ export default function Home() {
                   tempLows={tempLows}
                 />
               </div>
-              <div className="w-full h-40 flex justify-start items-center ">
-                <div className="w-[10%] md:mr-2">
+              <div className="w-[95%] m-auto md:m-0 md:w-full lg:w-[75%] h-40 flex justify-between items-center md:justify-start transform-all duration-300">
+                <div className="md:w-[10%] md:mr-2 lg:h-full">
                   <SearchButtonComponent
                     isInputEmpty={isInputEmpty}
                     onclick={handleSearchButton}
                   />
                 </div>
-                <div className="w-[40%] h-[25%] md:w-[70%] ">
+                <div className="h-[50%] md:h-[35%] md:w-[70%] lg:w-[50%] lg:h-[40%] ">
                   <InputComponent
                     isValueEmpty={isErrorOn}
                     value={userSearchInput}
@@ -226,7 +225,7 @@ export default function Home() {
                     onKeydown={handleKeyDown}
                   />
                 </div>
-                <div className="h-20 w-20 flex justify-center items-center md:h-10 md:w-10 ">
+                <div className="md:w-10 md:h-10 lg:h-full lg:w-20 flex justify-center items-center">
                   <LikeButtonComponent
                     isLiked={isLiked}
                     favoriteClick={handleLikeButton}
