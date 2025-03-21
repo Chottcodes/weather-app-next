@@ -115,7 +115,7 @@ export default function Home() {
         console.log(error);
       }
     };
-    // getCurrentWeatherByCoords()
+    getCurrentWeatherByCoords()
   }, [latitude, longitude]);
   //GeoLocation section End
   useEffect(() => {
@@ -178,6 +178,19 @@ export default function Home() {
       setIsInputEmpty(true);
     }
   }, [userSearchInput]);
+  useEffect(()=>{    
+      const PreviousSearch = localStorage.getItem("Previous-Search")
+      if(PreviousSearch)
+      {
+        setCityName(PreviousSearch)
+      }
+  },[])
+  useEffect(()=>{
+    if(cityName)
+    {
+      localStorage.setItem("Previous-Search",cityName)
+    }
+  },[cityName])
 
   return (
     <div
@@ -197,12 +210,12 @@ export default function Home() {
           />
         </div>
         <div className="w-full h-[100%] flex flex-col ">
-          <div className="h-[70%] md:w-full md:h-full bg-amber-600 flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center transform-all duration-300">
+          <div className="h-[70%] md:w-full md:h-full flex flex-col justify-center items-center md:flex-row md:justify-center md:items-center transform-all duration-300">
             <div className="w-[50%] h-[20%] md:h-[80%] ">
               <WeatherIcon Icon={mainIcon} />
             </div>
-            <div className="w-full h-[60%] md:h-[80%] lg:w-[50%] bg-green-600 flex flex-col justify-center items-start transform-all duration-300">
-              <div className="w-full h-[70%] md:w-full lg:w-[50%]">
+            <div className="w-full h-[60%] md:h-[80%] lg:w-[50%] flex flex-col justify-center items-start transform-all duration-300">
+              <div className="w-full h-[70%] md:w-full lg:w-[50%] transform-all duration-300">
                 <CurrentTempDisplayComponent
                   mainTempDisplay={mainTempDisplay}
                   cityName={cityName}
@@ -211,13 +224,13 @@ export default function Home() {
                 />
               </div>
               <div className="w-[95%] m-auto md:m-0 md:w-full lg:w-[75%] h-40 flex justify-between items-center md:justify-start transform-all duration-300">
-                <div className="md:w-[10%] md:mr-2 lg:h-full">
+                <div className="md:w-[10%] md:mr-2 lg:h-full transform-all duration-300">
                   <SearchButtonComponent
                     isInputEmpty={isInputEmpty}
                     onclick={handleSearchButton}
                   />
                 </div>
-                <div className="h-[50%] md:h-[35%] md:w-[70%] lg:w-[50%] lg:h-[40%] ">
+                <div className="h-[50%] md:h-[35%] md:w-[70%] lg:w-[50%] lg:h-[40%] transform-all duration-300">
                   <InputComponent
                     isValueEmpty={isErrorOn}
                     value={userSearchInput}
@@ -225,7 +238,7 @@ export default function Home() {
                     onKeydown={handleKeyDown}
                   />
                 </div>
-                <div className="md:w-10 md:h-10 lg:h-full lg:w-20 flex justify-center items-center">
+                <div className="md:w-10 md:h-10 lg:h-full lg:w-20 flex justify-center items-center transform-all duration-300">
                   <LikeButtonComponent
                     isLiked={isLiked}
                     favoriteClick={handleLikeButton}

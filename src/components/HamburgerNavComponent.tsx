@@ -32,7 +32,7 @@ const HamburgerNav = (props:HamburgerNavProps) => {
   };
 
   return (
-    <div className="relative lg:pr-10">
+    <div className="relative md:pr-11 lg:pr-10">
       <button
         className=" p-4 text-white focus:outline-none"
         onClick={toggleMenu}
