@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 interface proptypes {
   Temp: number | undefined;
@@ -9,10 +10,11 @@ const FiveDayWeatherComponent = (props: proptypes) => {
   return (
     <div className="w-full h-full flex justify-evenly items-center transform-all duration-300">
       <div className="flex flex-col justify-center items-center lg:text-2xl">
-        <img
+        <Image
           className="h-20"
           src={`https://openweathermap.org/img/wn/${Icon}.png`}
           alt="Weather icon"
+          width={100} height={100}
         />
         <h1>{`${Temp}°F`}</h1>
         <h1>{Name}</h1>

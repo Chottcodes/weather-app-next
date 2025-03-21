@@ -1,4 +1,5 @@
 'use client'
+import Image from "next/image";
 import React from "react";
 interface LikeButtonProps {
   isLiked: boolean;
@@ -12,10 +13,10 @@ const LikeButtonComponent = (props: LikeButtonProps) => {
   return (
     <div className="w-full h-full flex justify-center items-center transform-all duration-300" >
       <button onClick={favoriteClick} className="pointer-cursor">
-        <img src={clearstar} alt="Like Icon" className={`${isLiked ? 'hidden': 'block'} h-10 md:h-7 lg:h-12`} />
+        <Image width={100} height={100} src={clearstar} alt="Like Icon" className={`${isLiked ? 'hidden': 'block'} h-6 w-6 md:h-7 md:w-7 lg:h-10 lg:w-10`} />
       </button>
       <button onClick={removeFavorite} className="pointer-cursor">
-        <img src={fullstar} alt="Like Icon" className={`${isLiked ? 'block': 'hidden'} h-10`} />
+        <Image width={100} height={100} src={fullstar} alt="Like Icon" className={`${isLiked ? 'block': 'hidden'} h-6 w-6 md:h-7 md:w-7 lg:h-10 lg:w-10`} />
       </button>
     </div>
   );

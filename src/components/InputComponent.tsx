@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import React from "react";
 interface InputComponentProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,10 +23,12 @@ const InputComponent = (props: InputComponentProps) => {
         >
           Please Enter Location
         </p>
-        <img
-          className="pl-5 pr-5 h-5 absolute"
+        <Image
+          className="md:h-7 md:w-7 lg:h-10  lg:w-10  pl-5 pr-5 absolute"
           src="/assets/images/search-icon.png"
           alt="Search Icon"
+          width={100}
+          height={100}
         />
         <input
           type="text"

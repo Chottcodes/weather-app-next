@@ -115,7 +115,7 @@ export default function Home() {
         console.log(error);
       }
     };
-    getCurrentWeatherByCoords()
+    // getCurrentWeatherByCoords()
   }, [latitude, longitude]);
   //GeoLocation section End
   useEffect(() => {

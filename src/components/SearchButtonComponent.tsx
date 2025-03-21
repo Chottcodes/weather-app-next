@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 interface propTypes {
     isInputEmpty:boolean
@@ -16,10 +17,12 @@ const SearchButtonComponent = (props:propTypes) => {
         }
     },[isInputEmpty])
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center relative transform-all duration-300">
+    <div className="w-full h-full flex flex-col justify-center items-center relative transform-all duration-300 ">
       <button className="w-full h-full flex justify-center items-center cursor-pointer" onClick={onclick}>
-        <img
-            className={`${isBouncing ? 'animate-bounce h-10':'h-10'} md:h-8 lg:h-12 `}
+        <Image
+        width={100}
+        height={100}
+            className={`${isBouncing ? 'animate-bounce h-10':'h-10'} h-[30px] w-[30px] md:h-7 md:w-7 lg:h-10 lg:w-10`}
           src="/assets/images/location.png"
           alt="Navagation icon"
         />
