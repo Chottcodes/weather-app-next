@@ -1,9 +1,13 @@
 import React from 'react'
-
-const WeatherIcon = () => {
+interface propsType{
+  Icon:string
+}
+const WeatherIcon = (props:propsType) => {
+  const {Icon}=props
+  const iconUrl = `https://openweathermap.org/img/wn/${Icon}.png`;
   return (
     <div className='w-full h-full flex items-center justify-center'>
-        <img className='h-50' src="/assets/images/cloud.png" alt="cloud icon" />
+        <img className='h-50' src={iconUrl} alt="cloud icon" />
     </div>
   )
 }

@@ -1,11 +1,34 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+interface HamburgerNavProps {
+  onFavoriteClick?: (cityName: string) => void;
+}
 
-const HamburgerNav = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const HamburgerNav = (props:HamburgerNavProps) => {
+  const {onFavoriteClick} = props
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    if (isOpen) {
+      const loadFavorites = () => {
+        const favoritesData = localStorage.getItem("favorites");
+        if (favoritesData) {
+          setFavorites(JSON.parse(favoritesData));
+        }
+      };
+
+      loadFavorites();
+    }
+  }, [isOpen]);
+  const handleFavoriteClick = (cityName:string) => {
+    if (onFavoriteClick) {
+      onFavoriteClick(cityName);
+    }
+    toggleMenu()
   };
 
   return (
@@ -26,17 +49,22 @@ const HamburgerNav = () => {
         <div className="flex justify-end p-4">
           <button className="text-black" onClick={toggleMenu}>
             X
-          </button> 
+          </button>
         </div>
         <div className="w-full h-10 flex justify-center items-center">
-            <h1 className="lg:text-2xl text-black" >Favorites</h1>
+          <h1 className="lg:text-2xl text-black">Favorites</h1>
         </div>
         <ul className="flex flex-col items-center space-y-6 mt-10 text-black">
-          <li>
-            <a href="#about" className="text-2xl hover:text-gray-900">
-              About
-            </a>
-          </li>
+          {favorites.map((favorite, index) => (
+            <li key={index} className="w-full text-center">
+              <button
+                onClick={() => handleFavoriteClick(favorite)}
+                className="text-lg hover:text-gray-700 py-2 px-4 rounded-md hover:bg-gray-200 w-full"
+              >
+                {favorite}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
