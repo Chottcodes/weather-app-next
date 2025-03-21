@@ -10,7 +10,7 @@ const CurrentTempDisplayComponent = (props: proptypes) => {
   return (
     <div className="w-full h-auto">
       <div className="w-full h-20">
-        <h1 className="text-[65px] text-black">{`${mainTempDisplay}°F`}</h1>
+        <h1 className="text-[65px] md:text-[40px] text-black">{`${mainTempDisplay}°F`}</h1>
       </div>
       <div className="w-full h-auto flex flex-col gap-2 text-black text-[20px]">
         <div className="">

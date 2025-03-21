@@ -12,7 +12,7 @@ import {
   GetFiveDayForcast,
   GetWeatherByCoordinates,
 } from "@/lib/server";
-import { useState, useEffect,} from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [userSearchInput, setUserSearchInput] = useState<string>("");
@@ -25,7 +25,8 @@ export default function Home() {
   const [longitude, setLongitude] = useState<number | null>();
   const [forcast, setForcast] = useState<any[]>([]);
   const [isLiked, setIsLike] = useState(false);
-  const [isInputEmpty, setIsInputEmpty] = useState(true);
+  const [isInputEmpty, setIsInputEmpty] = useState<boolean>(true);
+  const [isErrorOn, setIsErrorOn] = useState<boolean>(false);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserSearchInput(e.target.value);
@@ -38,9 +39,14 @@ export default function Home() {
 
     if (e.key === "Enter") {
       const userSearchInputValue = e.currentTarget.value;
-      setUserSearchInput(userSearchInputValue);
-      setCityName(userSearchInputValue);
-      setIsInputEmpty(true);
+      if (userSearchInputValue.trim() !== "") {
+        setUserSearchInput(userSearchInputValue);
+        setCityName(userSearchInputValue);
+        setIsInputEmpty(true);
+        setIsErrorOn(false);
+      }else{
+        setIsErrorOn(true)
+      }
     }
     if (favoritesArray.includes(cityName)) {
       setIsLike(true);
@@ -76,9 +82,12 @@ export default function Home() {
     setIsLike(false);
   };
   const handleSearchButton = () => {
-    setIsInputEmpty(false);
-    setIsInputEmpty(true);
-    setCityName(userSearchInput);
+    if(userSearchInput.trim()!== ""){
+    setCityName(userSearchInput); 
+    }else{
+      setIsErrorOn(true)
+    }
+   
   };
   //GeoLocation Section
   useEffect(() => {
@@ -100,9 +109,8 @@ export default function Home() {
           );
           const { name } = CurrentWeatherData;
           setCityName(name);
-        }
-        else{
-          setCityName("New York")
+        } else {
+          setCityName("New York");
         }
       } catch (error) {
         console.log(error);
@@ -131,9 +139,9 @@ export default function Home() {
         const { temp, temp_min, temp_max } = main;
         const { icon } = weather[0];
         setCityName(name);
-        setMainTempDisplay(temp);
-        setTempHighs(temp_max);
-        setTempLows(temp_min);
+        setMainTempDisplay(Math.trunc(temp));
+        setTempHighs(Math.trunc(temp_max));
+        setTempLows(Math.trunc(temp_min));
         setMainIcon(icon);
       } catch (error) {
         console.log(error);
@@ -151,7 +159,7 @@ export default function Home() {
           const item = FiveDayData.list[i];
           dailyForecast.push({
             date: item.dt_txt,
-            temp: item.main.temp,
+            temp: Math.trunc(item.main.temp),
             icon: item.weather[0].icon,
           });
         }
@@ -166,6 +174,7 @@ export default function Home() {
   useEffect(() => {
     if (userSearchInput != "" && userSearchInput.length > 3) {
       setIsInputEmpty(false);
+      setIsErrorOn(false)
     } else {
       setIsInputEmpty(true);
     }
@@ -173,28 +182,28 @@ export default function Home() {
 
   return (
     <div
-      className="w-full h-screen flex flex-col justify-center items-center"
+      className="w-full h-screen flex flex-col justify-end md:justify-center md:items-center font-sans"
       style={{
         backgroundImage: "url('/assets/images/background.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="lg:h-[90%] lg:w-[90%] lg:rounded-xl border-gray-300 border-4 drop-shadow-4xl bg-[#c3bfbfe2] flex flex-col justify-center text-black">
-        <div className="w-full h-16 flex justify-end items-center">
+      <div className="md:h-[75%] md:w-[90%] h-[90%] w-full rounded-xl border-gray-300 border-4 drop-shadow-4xl bg-[#c3bfbfe2] flex flex-col justify-center text-black">
+        <div className="w-full h-20 flex justify-end items-center">
           <HamburgerNav
             onFavoriteClick={(cityName) => {
               setCityName(cityName);
             }}
           />
         </div>
-        <div className="w-full h-[100%] flex flex-col">
-          <div className="w-full h-full flex">
-            <div className="w-[50%] h-full">
+        <div className="w-full h-[100%] flex flex-col bg-green-500">
+          <div className="w-full h-full flex flex-col md:flex-row md:justify-center md:items-center bg-red-500">
+            <div className="w-[50%] h-full md:h-[80%] bg-green-500">
               <WeatherIcon Icon={mainIcon} />
             </div>
-            <div className="w-[50%] h-full flex flex-col justify-center items-start">
-              <div className="w-[50%]">
+            <div className="w-[50%] md:h-[80%] h-full flex flex-col justify-center items-start">
+              <div className="w-[50%] md:w-full">
                 <CurrentTempDisplayComponent
                   mainTempDisplay={mainTempDisplay}
                   cityName={cityName}
@@ -202,21 +211,22 @@ export default function Home() {
                   tempLows={tempLows}
                 />
               </div>
-              <div className="w-full h-40 flex justify-start items-center">
-                <div className="w-[10%]">
+              <div className="w-full h-40 flex justify-start items-center ">
+                <div className="w-[10%] md:mr-2">
                   <SearchButtonComponent
                     isInputEmpty={isInputEmpty}
                     onclick={handleSearchButton}
                   />
                 </div>
-                <div className="w-[60%]">
+                <div className="w-[40%] h-[25%] md:w-[70%] ">
                   <InputComponent
+                    isValueEmpty={isErrorOn}
                     value={userSearchInput}
                     onChange={handleSearch}
                     onKeydown={handleKeyDown}
                   />
                 </div>
-                <div className="h-20 w-20 flex justify-center items-center">
+                <div className="h-20 w-20 flex justify-center items-center md:h-10 md:w-10 ">
                   <LikeButtonComponent
                     isLiked={isLiked}
                     favoriteClick={handleLikeButton}

@@ -37,12 +37,12 @@ const HamburgerNav = (props:HamburgerNavProps) => {
         className=" p-4 text-white focus:outline-none"
         onClick={toggleMenu}
       >
-        <div className="w-6 h-0.5 bg-black mb-1"></div>
-        <div className="w-6 h-0.5 bg-black mb-1"></div>
-        <div className="w-6 h-0.5 bg-black"></div>
+        <div className="w-6 h-1 bg-black mb-1"></div>
+        <div className="w-6 h-1 bg-black mb-1"></div>
+        <div className="w-6 h-1 bg-black"></div>
       </button>
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-[#D9D9D9] text-white transition-transform transform ${
+        className={`fixed top-0 right-0 w-64 h-full z-10 bg-[#D9D9D9] text-white transition-transform transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

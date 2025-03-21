@@ -19,7 +19,7 @@ const SearchButtonComponent = (props:propTypes) => {
     <div className="w-full h-full flex flex-col justify-center items-center relative">
       <button className="w-full h-full flex justify-center items-center cursor-pointer" onClick={onclick}>
         <img
-            className={`${isBouncing ? 'animate-bounce h-10':'h-10'} `}
+            className={`${isBouncing ? 'animate-bounce h-10':'h-10'} md:h-8 `}
           src="/assets/images/location.png"
           alt="Navagation icon"
         />
