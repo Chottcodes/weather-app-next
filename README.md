@@ -8,4 +8,5 @@ Your name Chris Wells-Hott
 
  // You can add multiple dates with description 3/20/2025
 
-// Person who Peer Reviewed your assignment
+David Monterrosa
+> Everything functions as it should. There is a bit of overflow on some of the icons on smaller screen sizes. Local Storage, and search function as they should.
